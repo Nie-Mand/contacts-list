@@ -4,8 +4,11 @@ import {
   useState,
   useCallback,
   useMemo,
+  useRef,
 } from 'react'
-import { useLoadContacts } from '@hooks/use-contacts'
+
+import { useLoadContacts, useOnActive } from '@hooks'
+import { sortedContacts } from '@utils'
 
 const ContactsContext = createContext()
 
@@ -19,7 +22,8 @@ export const useSelectCharacter = () => {
 }
 
 export function ContactsProvider({ children }) {
-  const { data, error, loading } = useLoadContacts()
+  const { data, error, loading, load } = useLoadContacts()
+  useOnActive(load)
 
   const [selected, setSelected] = useState('')
 
@@ -35,9 +39,12 @@ export function ContactsProvider({ children }) {
   )
 
   const contacts = useMemo(() => {
-    if (!selected) return data
-    return data.filter(
-      contact => contact.displayName.toLowerCase()[0] === selected.toLowerCase()
+    if (!selected) return sortedContacts(data)
+    return sortedContacts(
+      data.filter(
+        contact =>
+          contact.displayName.toLowerCase()[0] === selected.toLowerCase()
+      )
     )
   }, [data, selected])
 
