@@ -1,11 +1,11 @@
 import contacts from 'react-native-contacts'
 import { PermissionsAndroid } from 'react-native'
 import { useEffect, useState } from 'react'
-import { hydrateData } from '../utils'
+import { hydrateData } from '@utils'
 
-export function useContacts() {
+export function useLoadContacts() {
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(true)
+  const [error, setError] = useState(null)
   const [data, setData] = useState([])
 
   useEffect(() => {
