@@ -7,11 +7,11 @@ function LetterButton({ letter }) {
 
   const onPress = useCallback(() => {
     selectCharacter(letter)
-  }, [letter])
+  }, [selectCharacter, letter])
 
   return (
     <Text
-      style={[styles.text, selected === letter && styles.selectedText]}
+      style={[styles.text, selected === letter && styles.selected]}
       onPress={onPress}
     >
       {letter}

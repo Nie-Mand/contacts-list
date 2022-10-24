@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet } from 'react-native'
+import { Text, View, StyleSheet, ScrollView } from 'react-native'
 import { useMemo } from 'react'
 import { useContacts } from '@ctx'
 import { letterButtonsGroup } from './LettersButton'
@@ -10,29 +10,34 @@ export default function ContactsList() {
   const buttons = useMemo(() => letterButtonsGroup(), [])
 
   return (
-    <View>
+    <>
       <ButtonGroup
         buttons={buttons}
         innerBorderStyle={buttonGroupStyles.innerBorder}
         containerStyle={buttonGroupStyles.container}
       />
-      {contacts.map((contact, idx) => (
-        <ListItem key={contact.displayName + idx.toString()}>
-          <Avatar
-            rounded
-            title={getInitials(contact.displayName)}
-            containerStyle={listItemsStyles.avatarContainer}
-            titleStyle={listItemsStyles.avatarTitle}
-          />
-          <ListItem.Content>
-            <Text>{contact.displayName}</Text>
-            {contact.phoneNumbers.map(phone => (
-              <Text key={phone.number}>{phone.number}</Text>
-            ))}
-          </ListItem.Content>
-        </ListItem>
-      ))}
-    </View>
+
+      <ScrollView>
+        <View>
+          {contacts.map((contact, idx) => (
+            <ListItem key={contact.displayName + idx.toString()}>
+              <Avatar
+                rounded
+                title={getInitials(contact.displayName)}
+                containerStyle={listItemsStyles.avatarContainer}
+                titleStyle={listItemsStyles.avatarTitle}
+              />
+              <ListItem.Content>
+                <Text>{contact.displayName}</Text>
+                {contact.phoneNumbers.map(phone => (
+                  <Text key={phone.number}>{phone.number}</Text>
+                ))}
+              </ListItem.Content>
+            </ListItem>
+          ))}
+        </View>
+      </ScrollView>
+    </>
   )
 }
 

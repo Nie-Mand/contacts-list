@@ -1,4 +1,4 @@
-import { ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native'
+import { StatusBar, StyleSheet, Text } from 'react-native'
 import { Header } from '@rneui/themed'
 import { ContactsProvider } from '@ctx'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
@@ -12,11 +12,7 @@ export default function App() {
         <Header leftContainerStyle={styles.header}>
           <Text style={styles.labelText}>Contacts</Text>
         </Header>
-        <ScrollView>
-          <View>
-            <Main />
-          </View>
-        </ScrollView>
+        <Main />
       </SafeAreaProvider>
     </ContactsProvider>
   )

@@ -25,12 +25,9 @@ export function ContactsProvider({ children }) {
 
   const selectCharacter = useCallback(
     character => {
-      console.log(selected, character)
       if (selected === character) {
-        console.log('unselecting')
         setSelected('')
       } else {
-        console.log('selecting')
         setSelected(character)
       }
     },
@@ -39,9 +36,8 @@ export function ContactsProvider({ children }) {
 
   const contacts = useMemo(() => {
     if (!selected) return data
-
     return data.filter(
-      contact => contact.displayName.toLowerCase() === selected.toLowerCase()
+      contact => contact.displayName.toLowerCase()[0] === selected.toLowerCase()
     )
   }, [data, selected])
 

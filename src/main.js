@@ -1,4 +1,10 @@
-import { Text, View, StyleSheet, ActivityIndicator } from 'react-native'
+import {
+  Text,
+  View,
+  StyleSheet,
+  ActivityIndicator,
+  ScrollView,
+} from 'react-native'
 import { useContacts } from '@ctx'
 import ContactsList from '@components/ContactsList'
 
@@ -7,14 +13,22 @@ export default function Main() {
 
   if (loading) {
     return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" />
-      </View>
+      <ScrollView>
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" />
+        </View>
+      </ScrollView>
     )
   }
 
   if (error) {
-    return <Text>Error: {error}</Text>
+    return (
+      <ScrollView>
+        <View>
+          <Text>Error: {error}</Text>
+        </View>
+      </ScrollView>
+    )
   }
 
   return <ContactsList />
